@@ -1,0 +1,14 @@
+{
+  "name": "card-collection-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx netlify-cli dev"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "mongoose": "^9.12.3",
+    "serverless-http": "^4.0.0"
+  }
+}

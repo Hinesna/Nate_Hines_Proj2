@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Card Collection - Library</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Card Collection</h1>
+    <p>Logged in as <strong id="username"></strong>
+      <button type="button" id="logout">Log out</button></p>
+  </header>
+
+  <!-- Static input section -->
+  <section>
+    <h2 id="form-title">Add a card</h2>
+    <form id="card-form" novalidate>
+      <input type="hidden" name="id" id="card-id">
+
+      <label for="card-name">Name (required)</label>
+      <input id="card-name" name="name" type="text" required maxlength="100">
+      <span id="card-name-error" class="error" aria-live="polite"></span>
+
+      <label for="card-rarity">Rarity</label>
+      <input id="card-rarity" name="rarity" type="text" maxlength="50" list="rarity-options">
+      <datalist id="rarity-options">
+        <option value="Common">
+        <option value="Uncommon">
+        <option value="Rare">
+        <option value="Epic">
+        <option value="Legendary">
+      </datalist>
+      <span id="card-rarity-error" class="error" aria-live="polite"></span>
+
+      <label for="card-element">Element (required)</label>
+      <input id="card-element" name="element" type="text" required maxlength="50">
+      <span id="card-element-error" class="error" aria-live="polite"></span>
+
+      <label for="card-set">Card Set</label>
+      <input id="card-set" name="setRelease" type="text" maxlength="100">
+      <span id="card-set-error" class="error" aria-live="polite"></span>
+
+      <label for="card-image">Image (optional)</label>
+      <input id="card-image" name="image" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+      <span id="card-image-error" class="error" aria-live="polite"></span>
+
+      <div id="remove-image-row" hidden>
+        <p>Leave the image field empty to keep the current image.</p>
+        <label for="remove-image">
+          <input id="remove-image" name="removeImage" type="checkbox"> Remove current image
+        </label>
+      </div>
+
+      <p id="card-form-message" class="error" role="alert"></p>
+      <button type="submit" id="submit-button">Add card</button>
+      <button type="button" id="cancel-edit" hidden>Cancel edit</button>
+    </form>
+  </section>
+
+  <!-- Search -->
+  <section>
+    <h2>Library</h2>
+    <form id="search-form">
+      <label for="search-q">Name</label>
+      <input id="search-q" name="q" type="search" maxlength="100">
+      <label for="search-rarity">Rarity</label>
+      <input id="search-rarity" name="rarity" type="search" maxlength="50">
+      <label for="search-element">Element</label>
+      <input id="search-element" name="element" type="search" maxlength="50">
+      <label for="search-set">Card Set</label>
+      <input id="search-set" name="set" type="search" maxlength="100">
+      <p>
+        <button type="submit">Search</button>
+        <button type="reset" id="search-reset">Clear</button>
+      </p>
+    </form>
+
+    <p id="library-message" role="status"></p>
+
+    <!-- Book: each page is a 3x3 grid of cards -->
+    <div id="book"></div>
+
+    <p>
+      <button type="button" id="prev-page">Previous</button>
+      <span id="page-indicator">Page 1 of 1</span>
+      <button type="button" id="next-page">Next</button>
+    </p>
+  </section>
+
+  <!-- Base structure of one library entry: image first, text below -->
+  <template id="card-template">
+    <article class="card" data-id="">
+      <img alt="" hidden>
+      <dl>
+        <dt>Name</dt>    <dd class="name"></dd>
+        <dt>Rarity</dt>  <dd class="rarity"></dd>
+        <dt>Element</dt> <dd class="element"></dd>
+        <dt>Set</dt>     <dd class="set"></dd>
+      </dl>
+      <button type="button" class="edit">Edit</button>
+      <button type="button" class="delete">Delete</button>
+    </article>
+  </template>
+
+  <script type="module" src="js/library.js"></script>
+</body>
+</html>
